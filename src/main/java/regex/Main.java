@@ -50,14 +50,19 @@ public class Main {
      * @return a list containing the email addresses in the string.
      */
     public static List<String> extractEmails(String str) {
+        final List<String> result = new ArrayList<>();
+
+        // Handle null input: return empty list
+        if (str == null) {
+            return result;
+        }
+
         final Pattern pattern = Pattern.compile("\\b[^\\s@]+@(mail\\.)?utoronto\\.ca\\b");
         final Matcher matcher = pattern.matcher(str);
-        final List<String> result = new ArrayList<>();
 
         while (matcher.find()) {
             result.add(matcher.group());
         }
-
         return result;
     }
 
@@ -67,6 +72,11 @@ public class Main {
      * @return whether str contains the same capital letter twice.
      */
     public static boolean checkForDoubles(String str) {
+        // Handle null input: no doubles in a null string
+        if (str == null) {
+            return false;
+        }
+
         return str.matches(".*([A-Z]).*\\1.*");
     }
 }
